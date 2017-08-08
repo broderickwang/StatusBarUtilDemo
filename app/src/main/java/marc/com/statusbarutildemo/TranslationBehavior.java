@@ -19,9 +19,16 @@ import android.view.View;
 public class TranslationBehavior extends FloatingActionButton.Behavior {
 
 	private boolean mIsOut = false;
+	private View mBottomView;
 
 	public TranslationBehavior(Context context, AttributeSet attrs) {
 		super(context, attrs);
+	}
+
+	@Override
+	public boolean onLayoutChild(CoordinatorLayout parent, FloatingActionButton child, int layoutDirection) {
+		mBottomView = parent.findViewById(R.id.bottom_tab_layout);
+		return super.onLayoutChild(parent, child, layoutDirection);
 	}
 
 	/**
@@ -42,12 +49,14 @@ public class TranslationBehavior extends FloatingActionButton.Behavior {
 			if(!mIsOut ) {
 				int translationY = ((CoordinatorLayout.LayoutParams) child.getLayoutParams()).bottomMargin + child.getMeasuredHeight();
 				child.animate().translationY(translationY).setDuration(500).start();
+				mBottomView.animate().translationY(mBottomView.getMeasuredHeight()).setDuration(500).start();
 				mIsOut = true;
 			}
 		}else{
 //			向上
 			if(mIsOut) {
 				child.animate().translationY(0).setDuration(500).start();
+				mBottomView.animate().translationY(0).setDuration(500).start();
 				mIsOut = false;
 			}
 		}
