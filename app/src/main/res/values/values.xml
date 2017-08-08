@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="floatingbutton_behavior" translatable="false">marc.com.statusbarutildemo.TranslationBehavior</string>
+</resources>
